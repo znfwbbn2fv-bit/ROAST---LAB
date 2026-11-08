@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#12131b">
+  <meta name="description" content="ROAST LAB: generatore offline di frecciatine satiriche su misura, per iPhone.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ROAST LAB">
+  <meta name="application-name" content="ROAST LAB">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icon-180.png">
+  <link rel="icon" href="./icon-192.png" type="image/png">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./data.js"></script>
+  <script defer src="./app.js"></script>
+  <title>ROAST LAB · Generatore di frecciatine</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="site-header">
+      <div class="brand-mark" aria-hidden="true">🔥</div>
+      <div class="brand-copy"><div class="brand-name">ROAST <span>LAB</span><span class="brand-beta">1.0.2</span></div><div class="brand-subtitle">THE ART OF THE COMEBACK</div></div>
+      <span id="offlinePill" class="status-pill">Disponibile offline</span>
+    </header>
+    <main>
+      <section class="tab-view" id="view-create">
+        <div class="hero">
+          <div class="hero-orb hero-orb-1"></div><div class="hero-orb hero-orb-2"></div>
+          <div class="hero-content">
+            <div class="eyebrow"><span class="eyebrow-line"></span> LABORATORIO DI SARCASMO</div>
+            <h1>Le parole<br><em>pungono meglio.</em></h1>
+            <p>Otto frecciatine su misura, zero parolacce banali. Scegli il comportamento, alza l'ironia e genera.</p>
+            <div class="feature-icons"><span>✦ 8 battute</span><span>✦ 100% offline</span><span>✦ Preferiti</span></div>
+          </div>
+        </div>
+        <section class="panel generator-panel" aria-label="Personalizza le battute">
+          <div class="section-head"><div><span class="step-marker">01 / CONFIGURA</span><h2>Chi mettiamo in scena?</h2></div><div class="decor-star">✺</div></div>
+          <label for="targetName" class="field-label">Nome o soprannome <span>opzionale</span></label>
+          <div class="input-wrap"><span class="input-symbol">@</span><input id="targetName" maxlength="48" autocomplete="off" placeholder="Es. Mario" aria-label="Nome o soprannome"></div>
+          <label for="themeSelect" class="field-label">Il comportamento</label>
+          <div class="select-wrap"><select id="themeSelect"></select><span class="chevron">⌄</span></div>
+          <p class="field-hint" id="themeHint"></p>
+          <div class="two-cols">
+            <div><label for="toneSelect" class="field-label">Stile</label><div class="select-wrap"><select id="toneSelect"><option value="assurdo">🪐 Assurdo</option><option value="sarcastico">😏 Sarcastico</option><option value="elegante">🎩 Elegante</option></select><span class="chevron">⌄</span></div></div>
+            <div><label for="intensitySelect" class="field-label">Intensità <span id="intensityIcon">🌶️🌶️🌶️</span></label><div class="select-wrap"><select id="intensitySelect"><option value="leggero">Leggera</option><option value="medio">Media</option><option value="forte">Forte</option></select><span class="chevron">⌄</span></div></div>
+          </div>
+          <label for="episode" class="field-label">Un episodio realmente accaduto <span>opzionale</span></label>
+          <textarea id="episode" maxlength="220" rows="3" placeholder="Es. Ha fatto un dramma perché il caffè era tiepido…"></textarea>
+          <p class="field-hint">Offline, il dettaglio viene inserito in due battute. Per una rielaborazione intelligente, usa il pulsante «Prompt per ChatGPT».</p>
+          <button class="primary-btn" id="generateButton"><span class="button-sparkle">✦</span> GENERA 8 FRECCIATINE <span class="button-arrow">↗</span></button>
+          <button class="secondary-btn" id="aiPromptBtn"><span>✧</span> Copia il prompt per ChatGPT <span>⧉</span></button>
+        </section>
+        <section class="result-section" aria-label="Risultati generati">
+          <div class="result-title"><div><span class="step-marker">02 / IL RISULTATO</span><h2>Il repertorio <span class="heading-spark">✳</span></h2><p>Ogni battuta si può copiare, condividere o salvare.</p></div><button id="reshuffleButton" class="round-btn" title="Nuove battute" aria-label="Genera altre otto battute">↻</button></div>
+          <div id="results" class="results-grid" aria-live="polite"></div>
+        </section>
+        <div class="footer-note"><span>✳</span> Satira sui comportamenti, mai sulle caratteristiche personali sensibili.</div>
+      </section>
+      <section class="tab-view" id="view-saved" hidden>
+        <div class="page-title"><span class="step-marker">COLLEZIONE PERSONALE</span><h1>Le tue <em>migliori.</em></h1><p>Le frecciatine salvate restano disponibili anche senza connessione.</p></div>
+        <div id="favorites" class="results-grid"></div>
+        <button id="clearFavBtn" class="ghost-danger">Elimina tutti i preferiti</button>
+      </section>
+      <section class="tab-view" id="view-info" hidden>
+        <div class="page-title"><span class="step-marker">IL TUO LABORATORIO</span><h1>Tutto <em>sotto controllo.</em></h1><p>La tua raccolta è conservata sul dispositivo.</p></div>
+        <section class="panel info-panel">
+          <div class="info-icon">📱</div><h2>Installazione su iPhone</h2>
+          <p>Apri l’indirizzo pubblico HTTPS di ROAST LAB in <strong>Safari</strong>, tocca <strong>Condividi</strong>, poi <strong>Aggiungi alla schermata Home</strong>. Attiva <strong>Apri come app</strong> e tocca <strong>Aggiungi</strong>.</p>
+          <div class="info-tip">Per funzionare offline, apri una volta l’app mentre sei connesso. Le successive aperture possono avvenire senza rete.</div>
+        </section>
+        <section class="panel info-panel">
+          <div class="info-icon">🔒</div><h2>Privacy locale</h2>
+          <p>Nomi, episodi e preferiti non vengono inviati a server dal generatore. Le frasi provengono da un archivio locale, senza chiamate ad API esterne. La condivisione avviene soltanto quando la richiedi.</p>
+          <div class="button-stack"><button id="backupBtn" class="secondary-btn">↓ Esporta backup (.json)</button><button id="importBtn" class="secondary-btn">↑ Ripristina backup (.json)</button><input id="importFile" type="file" accept=".json,application/json" hidden><button id="shareAppBtn" class="secondary-btn">↗ Condividi il link dell’app</button></div>
+        </section>
+        <section class="panel info-panel"><div class="info-icon">✨</div><h2>Come funziona</h2><p>Il motore combina scenari comici scritti per sei comportamenti con tre stili e tre intensità. Ogni volta sceglie otto battute diverse. Non è un modello di intelligenza artificiale e non interpreta automaticamente il contesto.</p><p class="version">ROAST LAB v<span id="appVersion">1.0.0</span> · Realizzata per iPhone</p></section>
+      </section>
+    </main>
+    <nav class="bottom-nav" aria-label="Navigazione principale">
+      <button class="nav-item active" data-tab="create" aria-selected="true"><span class="nav-icon">✺</span><span>Genera</span></button>
+      <button class="nav-item" data-tab="saved" aria-selected="false"><span class="nav-icon">♡</span><span>Preferiti <span class="nav-count" id="countFav">0</span></span></button>
+      <button class="nav-item" data-tab="info" aria-selected="false"><span class="nav-icon">⚙</span><span>Info e dati</span></button>
+    </nav>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+</body>
+</html>
